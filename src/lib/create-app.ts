@@ -4,10 +4,13 @@ import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
 import { AppBindings } from "./types";
 
 
-const createApp = () => {
-  const app = new OpenAPIHono<AppBindings>({
+export const createRouter = () => {
+  return new OpenAPIHono<AppBindings>({
     strict: false
   });
+}
+const createApp = () => {
+  const app = createRouter()
   app.use(serveEmojiFavicon("🧑‍💻"));
   // ERRORS
   app.notFound(notFound);
@@ -21,5 +24,6 @@ const createApp = () => {
   return app 
 }
 
+ 
 
 export default createApp;
