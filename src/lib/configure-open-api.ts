@@ -1,3 +1,4 @@
+import { apiReference } from '@scalar/hono-api-reference';
 import packageJSON from '../../package.json';
 import { AppOpenAPI } from "./types";
 
@@ -9,6 +10,15 @@ const configureOpenAPI = (app: AppOpenAPI) => {
             title: "Todo API"
         }
     })
+
+    app.get(
+        '/reference',
+        apiReference({
+            spec: {
+                url: '/doc',
+            },
+        }),
+    )
 };
 
 
