@@ -7,6 +7,7 @@ expand(config());
 const ENVSchema = z.object({
   NODE_ENV: z.string().default("development"),
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]),
+  DATABASE_URL: z.string().url(),
 });
 
 export type env = z.infer<typeof ENVSchema>;
