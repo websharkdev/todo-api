@@ -5,6 +5,7 @@
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint .",
     "lint:fix": "bun run lint --fix",
+    "test": "cross-env NODE_ENV=test LOG_LEVEL=silent vitest",
     "studio": "bun drizzle-kit studio"
   },
   "dependencies": {
@@ -29,7 +30,9 @@
     "@types/bun": "latest",
     "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.30.4",
+    "cross-env": "^7.0.3",
     "eslint": "^9.19.0",
-    "eslint-plugin-format": "^1.0.1"
+    "eslint-plugin-format": "^1.0.1",
+    "vitest": "^2.1.8"
   }
 }

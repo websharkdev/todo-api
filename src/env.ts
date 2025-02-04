@@ -6,7 +6,7 @@ expand(config());
 
 const ENVSchema = z.object({
   NODE_ENV: z.string().default("development"),
-  LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]),
+  LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", 'silent']),
   DATABASE_URL: z.string().url(),
 });
 
