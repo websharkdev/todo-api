@@ -1,9 +1,10 @@
 
 import * as HTTPStatusCodes from "stoker/http-status-codes";
 import { AppRouteHandlrer } from "@/lib/types";
-import { CreateRoute, ItemRoute, ListRoute } from "./tasks.routes";
+import { CreateRoute, ItemRoute, ListRoute, PatchRoute } from "./tasks.routes";
 import db from "@/db";
 import { tasks } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export const list: AppRouteHandlrer<ListRoute> = async (c) => {
     const all = await db.query.tasks.findMany()
@@ -27,6 +28,19 @@ export const getItem: AppRouteHandlrer<ItemRoute> = async (c) => {
     
     if(!!result) return c.json(result, HTTPStatusCodes.OK)
 
+    return c.json({
+        message: 'Not founded'
+    }, HTTPStatusCodes.NOT_FOUND)
+}
+
+export const patch: AppRouteHandlrer<PatchRoute> = async (c) => {
+    const {id} = c.req.valid('param')
+    const updates = c.req.valid('json')
+
+    const [task] = await db.update(tasks).set(updates).where(eq(tasks.id, id)).returning()
+
+    if (!!task) return c.json(task, HTTPStatusCodes.OK)
+        
     return c.json({
         message: 'Not founded'
     }, HTTPStatusCodes.NOT_FOUND)

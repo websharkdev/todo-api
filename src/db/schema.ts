@@ -14,3 +14,5 @@ export const insertTasksSchema = createInsertSchema(tasks).omit({
     createdAt: true,
     updatedAt: true,
 })
+
+export const patchTasksSchema = insertTasksSchema.partial()
