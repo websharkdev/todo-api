@@ -11,9 +11,17 @@ const configureOpenAPI = (app: AppOpenAPI) => {
         }
     })
 
+
     app.get(
-        '/reference',
+        '/documentation',
         apiReference({
+            pageTitle: 'Hono API Documentation',
+            theme: 'mars',
+            _integration: 'hono',
+            defaultHttpClient: {
+                targetKey: 'javascript',
+                clientKey: "fetch"
+            }, 
             spec: {
                 url: '/doc',
             },
